@@ -1,0 +1,16 @@
+name: accounting-lite
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=accountingdb
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d accountingdb"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
