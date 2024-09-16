@@ -10,6 +10,7 @@ import (
 
 type Querier interface {
 	AddCustomer(ctx context.Context, arg AddCustomerParams) (Customer, error)
+	GetCustomer(ctx context.Context, id int64) (Customer, error)
 }
 
 var _ Querier = (*Queries)(nil)

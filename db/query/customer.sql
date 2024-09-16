@@ -7,3 +7,6 @@ INSERT INTO customers (
 ) VALUES (
     $1, $2, $3, $4
 ) RETURNING *;
+
+-- name: GetCustomer :one
+SELECT * FROM customers WHERE id = $1;

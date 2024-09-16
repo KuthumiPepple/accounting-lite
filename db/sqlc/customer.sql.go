@@ -44,3 +44,20 @@ func (q *Queries) AddCustomer(ctx context.Context, arg AddCustomerParams) (Custo
 	)
 	return i, err
 }
+
+const getCustomer = `-- name: GetCustomer :one
+SELECT id, name, phone, address, email FROM customers WHERE id = $1
+`
+
+func (q *Queries) GetCustomer(ctx context.Context, id int64) (Customer, error) {
+	row := q.db.QueryRow(ctx, getCustomer, id)
+	var i Customer
+	err := row.Scan(
+		&i.ID,
+		&i.Name,
+		&i.Phone,
+		&i.Address,
+		&i.Email,
+	)
+	return i, err
+}
