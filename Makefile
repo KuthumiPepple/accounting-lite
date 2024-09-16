@@ -15,7 +15,10 @@ new_migration:
 sqlc:
 	sqlc generate
 
-test:
-	go test -v -cover ./...
+start:
+	docker compose start
 
-.PHONY: postgres migrateup migratedown new_migration test
+stop:
+	docker compose stop
+
+.PHONY: postgres migrateup migratedown new_migration sqlc start stop test
