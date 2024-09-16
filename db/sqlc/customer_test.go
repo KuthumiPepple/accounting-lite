@@ -44,3 +44,14 @@ func TestGetCustomer(t *testing.T) {
 	require.Equal(t, customer1.Address, customer2.Address)
 	require.Equal(t, customer1.Email, customer2.Email)
 }
+
+func TestDeleteCustomer(t *testing.T) {
+	customer1 := addRandomCustomer(t)
+	err := testDb.DeleteCustomer(context.Background(), customer1.ID)
+	require.NoError(t, err)
+
+	customer2, err := testDb.GetCustomer(context.Background(), customer1.ID)
+	require.Error(t, err)
+	require.EqualError(t, err, ErrRecordNotFound.Error())
+	require.Empty(t, customer2)
+}

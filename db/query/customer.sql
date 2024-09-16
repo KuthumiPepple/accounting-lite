@@ -10,3 +10,6 @@ INSERT INTO customers (
 
 -- name: GetCustomer :one
 SELECT * FROM customers WHERE id = $1;
+
+-- name: DeleteCustomer :exec
+DELETE FROM customers WHERE id = $1;
