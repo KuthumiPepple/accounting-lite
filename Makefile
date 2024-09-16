@@ -12,7 +12,13 @@ migratedown:
 new_migration:
 	migrate create -ext sql -dir db/migration -seq $(name)
 
-test:
-	go test -v -cover ./...
+sqlc:
+	sqlc generate
 
-.PHONY: postgres migrateup migratedown new_migration test
+start:
+	docker compose start
+
+stop:
+	docker compose stop
+
+.PHONY: postgres migrateup migratedown new_migration sqlc start stop test
